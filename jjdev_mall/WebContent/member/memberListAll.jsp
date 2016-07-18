@@ -3,13 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
 <%
 	request.setCharacterEncoding("utf-8");
-	
 	String driver = "com.mysql.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/jjdevmall?useUnicode=true&characterEncoding=utf-8";
 	String dbUser = "root";
@@ -26,7 +25,7 @@
 		conn = DriverManager.getConnection(url, dbUser, dbPass);
 		
 		//회원정보 insert쿼리 문장
-		String sql = "SELECT member_no, member_id, member_pw, member_name, member_gender, member_age FROM member";
+		String sql = "SELECT member_no, member_id, member_pw, member_name, member_sex, member_age FROM member";
 		
 		pstmt = conn.prepareStatement(sql);
 		
@@ -52,7 +51,7 @@
 			String memberId = rs.getString("member_id");
 			String memberPw = rs.getString("member_pw");
 			String memberName = rs.getString("member_name");
-			String memberGender = rs.getString("member_gender");
+			String memberSex = rs.getString("member_sex");
 			String memberAge = rs.getString("member_age");
 			
 			//확인 출력
@@ -60,7 +59,7 @@
 			System.out.println("ListAll.jsp -> " + memberId);
 			System.out.println("ListAll.jsp -> " + memberPw);
 			System.out.println("ListAll.jsp -> " + memberName);
-			System.out.println("ListAll.jsp -> " + memberGender);
+			System.out.println("ListAll.jsp -> " + memberSex);
 			System.out.println("ListAll.jsp -> " + memberAge);
 			
 			// 테이블 행에 하나의 회원정보 입력
@@ -69,7 +68,7 @@
 			out.print("<td>"+memberId+"</td>");
 			out.print("<td>"+memberPw+"</td>");
 			out.print("<td>"+memberName+"</td>");
-			out.print("<td>"+memberGender+"</td>");
+			out.print("<td>"+memberSex+"</td>");
 			out.print("<td>"+memberAge+"</td>");
 			out.print("<td><a href=>주소등록</a></td>");
 			out.print("</tr>");
