@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,47 +8,51 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-request.setCharacterEncoding("UTF-8");
-
-String itemName = request.getParameter("itemName");
-String itemPrice = request.getParameter("itemPrice");
-String itemRate = request.getParameter("itemRate");
-
-System.out.println(itemName+","+itemPrice+","+itemRate);
-
-Connection conn = null;
-PreparedStatement stmt = null;
-
-try{
-	Class.forName("com.mysql.jdbc.Driver");
-	String Url = "jdbc:mysql://127.0.0.1:3306/jjdevmall?useUnicode=true&characterEncoding=utf-8";
-	String dbId = "root";
-	String dbPw = "java0000";
-	conn = DriverManager.getConnection(Url,dbId,dbPw);
+<% 
+	request.setCharacterEncoding("utf-8");
+	String item_name = request.getParameter("item_name");
+	int item_price = Integer.parseInt(request.getParameter("item_price"));
+	int item_rate = Integer.parseInt(request.getParameter("item_rate"));
 	
-	conn.setAutoCommit(false);
+/* 	System.out.println("item_name : " + item_name);
+	System.out.println("item_price : " + item_price);
+	System.out.println("item_rate : " + item_rate); */
 	
-	String sql = "insert into item(item_name,item_price,item_rate) values(?,?,?)";
-	stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-	stmt.setString(1,itemName);
-	stmt.setString(2,itemPrice);
-	stmt.setString(3,itemRate);
+//jdbc
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+ 	int result = 0;
 	
-	stmt.executeUpdate();
-	
-	conn.commit();
+	String driver = "com.mysql.jdbc.Driver";
+ 	String dbUrl = "jdbc:mysql://127.0.0.1:3306/jjdevmall?useUnicode=true&characterEncoding=utf8";
+ 	String dbUser = "root";
+ 	String dbPw = "java0000";
+ 	
+ 	try{
+ 	 	Class.forName(driver);
+ 	 //02	
+ 	 	conn = DriverManager.getConnection(dbUrl, dbUser, dbPw);
+ 	 	conn.setAutoCommit(false);
+ 	 //03
+ 	 	String sql="INSERT INTO item (item_name, item_price, item_rate) VALUES (?, ?, ?)";
+ 	 	pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+ 	 	
+ 	 	pstmt.setString(1, item_name);
+ 	 	pstmt.setInt(2, item_price);
+ 	 	pstmt.setInt(3, item_rate);
+ 
+ 	 	//System.out.println(pstmt);
+ 	 //04 
+ 	 	result = pstmt.executeUpdate();
+ 	 	
+ 	 	rs = pstmt.getGeneratedKeys();
 
-}catch(Exception e){//예외시
-	conn.rollback();//롤백
-	e.printStackTrace();//롤백일시 콘솔에 뭘 출력해줌
-}finally {
-	// 6. 사용한 Statement 종료
-	if (stmt != null) try { stmt.close(); } catch(SQLException ex) {}
-	// 7. 커넥션 종료
-	if (conn != null) try { conn.close(); } catch(SQLException ex) {}
-}
+ 	 	conn.commit();
+ 	 }catch(Exception e){
+ 		 conn.rollback();
+ 		 e.printStackTrace();
+ 	 }
 %>
-
 </body>
 </html>

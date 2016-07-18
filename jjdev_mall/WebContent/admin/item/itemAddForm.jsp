@@ -3,49 +3,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+<style>
+	table, td {
+		border : 1px solid ;
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
-		$('#itemBtn').click(function(){
-			if($('#itemName').val()==''){
-				$('#itemNameHelper').text('상품명을 입력하세요');
-			}else if($('#itemprice').val()==''){
-				$('#itemPriceHelper').text('가격을 입력하세요');
-				$('#itemNameHelper').text('');
-			}else if($('#itemRate').val()==''){
-				$('#itemPriceHelper').text('');
-				$('#itemRateHelper').text('할인율을 입력하세요');
-			}else if($('#itemRate').val()>=1){
-				$('#itemRateHelper').text('');
-				$('#itemRateHelper').text('1보다 큰수는 입력할수 없습니다.');	
+		$('#item_name').focus();
+		$('#addBtn').click(function(){
+			if($('#item_name').val()==""){
+				alert("아이템 이름을 입력해주세요.");
+				$('#item_name').focus();
+			}else if($('#item_price').val()==""||isNaN($('#item_price').val())){
+				alert("가격을 옳바르게 입력해주세요.")
+				$('#item_price').focus();
+			}else if($('#item_rate').val()==""||$('#item_rate').val()>1||isNaN($('#item_rate').val())){
+				alert("옳바른 할인율을 입력해주세요.")
+				$('#item_rate').focus();
 			}else{
-				$('#itemForm').submit();
+				$('#addForm').submit();
 			}
 		});
 	});
 </script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 </head>
-<body> 
-<form id = "itemForm" action ="<%=request.getContextPath()%>/admin/item/itemAddAction.jsp">
-<h1> 회원가입 </h1>
-	<div>
-		<label>상품명 : </label>
-		<input  name = "itemName" id = "itemName" type = "text">
-		<span id = "itemNameHelper"></span>
-	</div>
-	<div>	
-		<label>상품가격 : </label>	
-		<input name = "itemPrice"id = "itemPrice" type = "text"  >
-		<span id = "itemPriceHelper"></span>
-	</div>
-	<div>	
-		<label>할인율: </label>
-		<input  name = "itemRate"id = "itemRate"  type = "text">
-		<span id = "itemRateHelper"></span>
-	</div>	
-		<input id= "itemBtn" type = "button" value = "item" >
-
-</form>	
+<body>	
+<form id="addForm" action="./itemAddAction.jsp" method="post">
+<h1>Item Add</h1>
+<table>
+	<tr>
+		<td>이름 : </td>
+		<td>
+			<input type="text" id="item_name" name="item_name">
+		</td>
+	</tr>
+	<tr>
+		<td>가격 : </td>
+		<td>
+			<input type="text" id="item_price" name="item_price">
+		</td>
+	</tr>
+	<tr>
+		<td>할인율 : </td>
+		<td>
+			<input type="text" id="item_rate" name="item_rate">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="button" id="addBtn" value="아이템 추가"></td>
+	</tr>	
+</table>
+</form>
 </body>
 </html>
