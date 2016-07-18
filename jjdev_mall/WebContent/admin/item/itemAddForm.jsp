@@ -27,7 +27,7 @@
 </script>
 </head>
 <body> 
-<form id = "itemForm" action ="<%=request.getContextPath()%>/admin/item/itemInsertAction.jsp">
+<form id = "itemForm" action ="<%=request.getContextPath()%>/admin/item/itemAddAction.jsp">
 <h1> 회원가입 </h1>
 	<div>
 		<label>상품명 : </label>
