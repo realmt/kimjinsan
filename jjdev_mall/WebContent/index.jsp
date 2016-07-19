@@ -1,25 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+	div
+	{
+		border: 1px solid #000000;
+		width: 50%;
+		margin: 0 auto;
+	}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
-<h1>INDEX</h1>
 <%
-	String sessionMemberId = (String)session.getAttribute("sessionMemberId");
-	if(sessionMemberId == null) { // 로그인이 안된 상태
+	session.invalidate();
 %>
-		<form action="<%=request.getContextPath()%>/member/loginAction.jsp">
-			<!-- 로그인 폼 구현 -->
-		</form>
-<%		
-	} else { // 로그인이 된 상태
-%>
-		<%=sessionMemberId%>님 반갑습니다.<a href="">[회원정보]</a><a href="">[로그아웃]</a>
-<%		
-	}
-%>
+	<div>
+		<h1>메인페이지 입니다.</h1>
+	</div>
+	
+	<div>
+		<ul>
+			<li><a href="<%=request.getContextPath() %>/admin/login/adminLogin.jsp">관리자 로그인</a></li>
+			<li><a href="<%=request.getContextPath() %>/member/login/memberLogin.jsp">회원 로그인</a></li>
+		</ul>
+	</div>
+	
+
 </body>
 </html>
