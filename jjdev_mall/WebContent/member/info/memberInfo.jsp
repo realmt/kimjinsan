@@ -57,7 +57,7 @@
 			String listSql = null;
 			//회원정보 select 문장
 			
-				listSql = "SELECT member_no, member_id, member_pw, member_name, member_sex, member_age FROM member WHERE member_id=?";
+				listSql = "SELECT member_no, member_id, member_pw, member_name, member_gender, member_age FROM member WHERE member_id=?";
 				pstmt1 = conn.prepareStatement(listSql);
 				pstmt1.setString(1, loginMemberId);
 				rs = pstmt1.executeQuery();
@@ -86,7 +86,7 @@
 							String memberId = rs.getString("member_id");
 							String memberPw = rs.getString("member_pw");
 							String memberName = rs.getString("member_name");
-							String memberSex = rs.getString("member_sex");
+							String memberGender = rs.getString("member_gender");
 							String memberAge = rs.getString("member_age");
 							
 							//확인 출력
@@ -94,7 +94,7 @@
 							System.out.println("memberInfo.jsp memberId -> " + memberId);
 							System.out.println("memberInfo.jsp memberPw -> " + memberPw);
 							System.out.println("memberInfo.jsp memberName -> " + memberName);
-							System.out.println("memberInfo.jsp memberSex -> " + memberSex);
+							System.out.println("memberInfo.jsp memberGender -> " + memberGender);
 							System.out.println("memberInfo.jsp memberAge -> " + memberAge);
 							// 테이블 행에 하나의 회원정보 입력
 				%>			
@@ -103,10 +103,10 @@
 								<td><%=memberId %></td>
 								<td><%=memberPw %></td>
 								<td><%=memberName %></td>
-								<td><%=memberSex %></td>
+								<td><%=memberGender %></td>
 								<td><%=memberAge %></td>
-								<td><a href="<%=request.getContextPath()%>/member/update/memberUpdateForm.jsp?send_id=<%=memberId%>">정보수정</a></td>
-								<td><a href="<%=request.getContextPath()%>/member/delete/memberDelete.jsp?send_id=<%=memberId%>">회원탈퇴</a></td>
+								<td><a href="<%=request.getContextPath()%>/member/update/memberUpdateForm.jsp?sendId=<%=memberId%>">정보수정</a></td>
+								<td><a href="<%=request.getContextPath()%>/member/delete/memberDelete.jsp?sendNo=<%=memberNo%>">회원탈퇴</a></td>
 							</tr>
 				<%
 						}

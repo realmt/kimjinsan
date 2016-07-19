@@ -11,7 +11,7 @@
 	//세션 종료
 	session.invalidate();
 
-	//memberIndex.jsp 페이지로 이동
+	//adminIndex.jsp 페이지로 이동
 	response.sendRedirect(request.getContextPath()+"/member/memberIndex.jsp");
 %>
 </body>
