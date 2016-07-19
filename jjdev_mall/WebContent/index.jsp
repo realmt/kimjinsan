@@ -8,7 +8,7 @@
 <body>
 <h1>INDEX</h1>
 <%
-	String sessionMemberId = (String)session.getAttribute("sessioMemberId");
+	String sessionMemberId = (String)session.getAttribute("sessionMemberId");
 	if(sessionMemberId == null) { // 로그인이 안된 상태
 %>
 		<form action="<%=request.getContextPath()%>/member/loginAction.jsp">
