@@ -1,0 +1,30 @@
+create database dev21db;
+grant select,insert,update,delete,create,drop,alter on dev21db.* to 'dev21id'@'localhost' identified by 'dev21pw';
+
+
+create table tb_member(
+m_id VARCHAR(10) NOT NULL PRIMARY KEY,
+m_pw VARCHAR(10) NOT NULL,
+m_level VARCHAR(10) NOT NULL,
+m_name VARCHAR(20) NOT NULL,
+m_email VARCHAR(80)
+)DEFAULT CHARSET=euckr;
+
+
+insert into tb_member values('id001','pw001','包府磊','全01','test01');
+insert into tb_member values('id002','pw002','魄概磊','全02','test02');
+insert into tb_member values('id003','pw003','魄概磊','全03','test03');
+insert into tb_member values('id004','pw004','备概磊','全04','test04');
+insert into tb_member values('id005','pw005','备概磊','全05','test05');
+
+
+
+create table tb_goods(
+g_code VARCHAR(10) NOT NULL PRIMARY KEY,
+g_name VARCHAR(10) NOT NULL,
+g_cate VARCHAR(10) NOT NULL,
+g_price VARCHAR(20) NOT NULL,
+g_desc VARCHAR(80)
+)DEFAULT CHARSET=euckr;
+
+
